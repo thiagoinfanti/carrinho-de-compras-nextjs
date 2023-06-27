@@ -1,7 +1,14 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Saira } from 'next/font/google'
+import { Header } from '@/components/header'
+import { FilterContextProvider } from '@/contexts/filter-context'
+import ReactQueryWrapper from '@/components/react-query-wrapper'
+import StyledComponentsRegistry from '@/lib/registry'
 
-const inter = Inter({ subsets: ['latin'] })
+const saira = Saira({ 
+  weight: ['300','400','500','600'],
+  subsets: ['latin'] 
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,8 +21,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-br">
+      <body className={saira.className}>
+        <StyledComponentsRegistry>
+          <ReactQueryWrapper>
+            <FilterContextProvider>
+              <Header />
+              {children}
+            </FilterContextProvider>
+          </ReactQueryWrapper>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
