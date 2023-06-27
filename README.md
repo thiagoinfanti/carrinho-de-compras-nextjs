@@ -1,34 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Plataforma que simula um carrinho de compras desenvolvida em nextjs e api em graphql.
 
-## Getting Started
+Resolução do desafio da [Rocketseat](https://github.com/Rocketseat/frontend-challenge)
 
-First, run the development server:
+## Recursos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- react-query para cache front-end das solicitações de listagem e filtro de produtos
+- ssr para cache do nextjs das páginas de produtos
+- localstorage para manipulação do carrinho de compras
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalação
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Caso não tenha o nodejs instalado [Instalação nodejs](https://nodejs.org/en/download)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1 - na raiz do projeto, execute o comando **npm install**
+2 - dentro da pasta api, execute o comando **npm install**
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Execução
+1 - na raiz do projeto, execute o comando **npm run dev**
+2 - dentro da pasta api, execute o comando **npm start**
