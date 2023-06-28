@@ -6,6 +6,7 @@ import { BackButton } from './back-button';
 import { formatPrice } from "@/utils/format-price";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Product } from "@/types/product";
+import { useFilter } from "@/hooks/useFilter";
 
 interface ProductContainerProps{
     data: Product
@@ -141,21 +142,23 @@ const ContentInfoButtonProduct = styled.div`
 
 export default function PorductContainer({data}: ProductContainerProps){
 
+    const {setCart} = useFilter();
+
     function addToChart(d: {}){
-        
-        let items = JSON.parse(localStorage.getItem("cart-items")!)
-        
-        if(items.length == 0){
-            items.push({...d, quantity: 1});
-        }else{
+
+        if(localStorage.getItem("cart-items")){
+            let items = JSON.parse(localStorage.getItem("cart-items")!)
             let existingProductIndex = items.findIndex((item: { id: string; }) => item.id === data.id);
             if(existingProductIndex < 0){
                 items.push({...d, quantity: 1});
             }
+            localStorage.setItem("cart-items", JSON.stringify(items));
+            setCart(items)
+        }else{
+            let item: any = [d];
+            localStorage.setItem("cart-items", JSON.stringify(item));
+            setCart(item);
         }
-
-        useLocalStorage("cart-items", items);
-       
     }
 
     return (

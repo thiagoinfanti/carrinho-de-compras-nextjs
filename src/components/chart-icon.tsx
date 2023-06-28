@@ -1,9 +1,8 @@
 "use client"
 
 import styled from "styled-components";
-
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
+import { useFilter } from "@/hooks/useFilter";
 
 const ChartIconContainer = styled.div`
    position: relative;
@@ -35,13 +34,14 @@ const TotalChartBall = styled.div`
 
 export function ChartContainer (){
     
-    const ttChart = useLocalStorage("cart-items",null);
+    const {cart} = useFilter();
+
     const router = useRouter();
     
     return (
         <ChartIconContainer onClick={()=> router.push("/cart")}>
             <img src="/icons/chart-icon.svg" />
-            <TotalChartBall className={ttChart == 0? "invisible": ""} id="totalChartBall">{ttChart}</TotalChartBall>
+            {cart.length > 0 && <TotalChartBall>{cart.length}</TotalChartBall>}
         </ChartIconContainer>
     )
     

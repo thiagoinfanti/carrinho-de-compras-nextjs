@@ -60,7 +60,7 @@ const SearchChartIconContainer = styled.div`
 export function Header(props: HeaderProps){
 
     const router = useRouter()
-
+    
     return(
         <TagHeader>
             <Logo onClick={()=>router.push("/")} className={sairaStencilOne.className}>capputteno</Logo>

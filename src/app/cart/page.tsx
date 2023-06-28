@@ -8,6 +8,7 @@ import { ProductCart } from '@/types/product';
 import { formatPrice } from '@/utils/format-price';
 import { CartItem } from '@/components/cart-item';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useFilter } from '@/hooks/useFilter';
 
 const ContainerCart = styled.div`
     display: flex;
@@ -208,8 +209,30 @@ export default function Chart(){
         document.title = "Capputteno - Cart"
     }, []);
 
-    
-    
+    const {cart, setCart} = useFilter();
+
+    const ttItemsCart = cart.length;
+    const ttPriceCart = cart.reduce((sum: number, item: ProductCart) => sum += (item.price_in_cents * item.quantity), 0);
+
+    const handleUpdateQuantity = (id: string, quantity: number) => {
+        const newValue: any = cart.map((item: ProductCart) => {
+            if(item.id !== id) return item
+            return {...item, quantity: quantity }
+        });
+        localStorage.setItem('cart-items',JSON.stringify(newValue))
+        setCart(newValue)
+    }
+
+    const handleDeleteItem = (id: string) => {
+        const newValue: any = cart.filter((item: ProductCart) => {
+            if(item.id !== id) return item
+        })
+        localStorage.setItem('cart-items',JSON.stringify(newValue))
+        setCart(newValue)
+    }
+
+    /*    
+    console.log(cart)
 
     const [cartItems, setCartsItems] = useState(JSON.parse(localStorage.getItem("cart-items")!))
 
@@ -235,7 +258,7 @@ export default function Chart(){
         setCartsItems(newValue)
         //updateLocalStorage(newValue)
     }
-    
+    */
     return (
         <main className={styles.main}>
             <ContainerCart>
@@ -245,7 +268,7 @@ export default function Chart(){
                     <h2>Total ({ttItemsCart}) produto{ttItemsCart > 1 ? "s" : ""} <span>{formatPrice(ttPriceCart)}</span></h2>
 
                     <CartList>
-                    {cartItems.map((item: ProductCart) => 
+                    {cart.map((item: ProductCart) => 
                         <CartItem 
                             product={item}
                             key={item.id}
