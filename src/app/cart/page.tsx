@@ -1,13 +1,12 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../page.module.css'
 import { BackButton } from '@/components/back-button';
 import { styled } from 'styled-components';
-import { Product, ProductCart } from '@/types/product';
+import { ProductCart } from '@/types/product';
 import { formatPrice } from '@/utils/format-price';
 import { CartItem } from '@/components/cart-item';
-import { ProductList } from '@/components/product-list';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const ContainerCart = styled.div`
@@ -204,6 +203,13 @@ const CartList = styled.ul`
 `
 
 export default function Chart(){
+
+    useEffect(() => {
+        document.title = "Capputteno - Cart"
+    }, []);
+
+    
+    
 
     const [cartItems, setCartsItems] = useState(JSON.parse(localStorage.getItem("cart-items")!))
 
